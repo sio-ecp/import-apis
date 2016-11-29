@@ -1,3 +1,5 @@
 # Requirements for Travis testing
 
 requests
+peewee
+MySQL-python
