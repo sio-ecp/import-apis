@@ -5,9 +5,11 @@ from peewee import *
 DBname=sqlCredentials.DB
 DBuser=sqlCredentials.USER
 DBpassword=sqlCredentials.PASSWORD
+DBport=sqlCredentials.PORT
+DBhost=sqlCredentials.HOST
 
 # Db connection
-db = MySQLDatabase(DBname, user=DBuser, passwd=DBpassword)
+db = MySQLDatabase(DBname, host=DBhost, port=DBport, user=DBuser, passwd=DBpassword)
 db.connect()
 
 class BaseModel(Model):
