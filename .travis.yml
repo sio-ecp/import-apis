@@ -2,6 +2,11 @@ language: python
 python:
   - '2.7'
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_9771f583d755_key -iv $encrypted_9771f583d755_iv -in sqlCredentials.py.enc -out importAPI/common/sqlCredentials.py -d
+  - openssl aes-256-cbc -K $encrypted_9771f583d755_key -iv $encrypted_9771f583d755_iv -in velibCredentials.py.enc -out importAPI/velib/velibCredentials.py -d
+  - openssl aes-256-cbc -K $encrypted_9771f583d755_key -iv $encrypted_9771f583d755_iv -in elevationCredentials.py.enc -out importAPI/elevation/elevationCredentials.py -d
+
 install:
   - pip install -r requirements.txt
 
