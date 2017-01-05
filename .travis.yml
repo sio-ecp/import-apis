@@ -8,6 +8,7 @@ before_install:
   - cp travisres/weatherCredentials.py importAPI/weather/
   - cp travisres/velibCredentials.py importAPI/velib/
   - cp travisres/elevationCredentials.py importAPI/elevation/
+  - cp travisres/sqlCredentials.py importAPI/common/
 
 install:
   - pip install -r requirements.txt
