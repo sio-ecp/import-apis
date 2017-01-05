@@ -2,6 +2,9 @@ language: python
 python:
   - '2.7'
 
+services:
+  - mysql
+
 before_install:
   - openssl aes-256-cbc -K $encrypted_9771f583d755_key -iv $encrypted_9771f583d755_iv -in travisres.tar.enc -out travisres.tar -d
   - tar xvf travisres.tar
@@ -9,6 +12,7 @@ before_install:
   - cp travisres/velibCredentials.py importAPI/velib/
   - cp travisres/elevationCredentials.py importAPI/elevation/
   - cp travisres/sqlCredentials.py importAPI/common/
+  - mysql -e 'CREATE DATABASE filrouge_test;'
 
 install:
   - pip install -r requirements.txt
