@@ -5,17 +5,16 @@ from importAPI.common import common
 
 #Constants
 API_KEY=weatherCredentials.APIKEY
-API_URL='https://api.jcdecaux.com/vls/v1/stations' ### TODO Maj weather
-DEFAULT_CONTRACT='Paris' ### TODO Maj weather
+API_URL='http://api.openweathermap.org/data/2.5/weather'
+DEFAULT_CITY='paris,fr'
 
 
-def importStationsStates(contract=DEFAULT_CONTRACT):
+def importWeatherState(city=DEFAULT_CITY):
     # Build and send the request
-    r = requests.get(API_URL, params={'apiKey': API_KEY, 'contract': contract})
+    r = requests.get(API_URL, params={'APPID': API_KEY, 'q': city})
 
     # Parse received JSON
     parsed_json = json.loads(r.text)
 
-    for station in parsed_json:
-        common.insertvelibstation(station)
+    common.insertweather(parsed_json)
 

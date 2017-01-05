@@ -21,6 +21,31 @@ def insertvelibstation(values):
     station.save()
 
 
+def insertweather(values):
+    weather = sqlModels.Weather()
+    weather.weather_group = values['weather'][0]['main']##TODO corresp?
+    weather.temperature = values['main']['temp']
+    weather.pressure = values['main']['pressure']
+    weather.humidity_percentage = values['main']['humidity']
+    weather.min_temperature = values['main']['temp_min']
+    weather.max_temperature = values['main']['temp_max']
+    weather.wind_speed = values['wind']['speed']
+    weather.wind_direction = values['wind']['deg']
+    weather.cloudiness_percentage = values['clouds']['all']
+    if 'rain' in values:
+        weather.rain_quantity = values['rain']['3h']
+    if 'snow' in values:
+        weather.snow_quantity = values['snow']['3h']
+    weather.sun_set = values['sys']['sunset']
+    weather.sun_rise = values['sys']['sunrise']
+    weather.calculation_time = values['dt']
+    weather.latitude = values['coord']['lat']
+    weather.longitude = values['coord']['lon']
+    weather.city_name = values['name']
+    weather.country_code = values['id']
+    weather.save()
+
+
 # Travis test
 def doCommon(value):
     if value:

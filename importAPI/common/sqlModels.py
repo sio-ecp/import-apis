@@ -35,6 +35,7 @@ class Station(BaseModel):
     city_name = CharField(255)
     country_code = CharField(255)
 
+
 class Weather(BaseModel):
     id_weather = PrimaryKeyField()
     weather_group = CharField(255)
@@ -46,8 +47,8 @@ class Weather(BaseModel):
     wind_speed = FloatField()
     wind_direction = FloatField()
     cloudiness_percentage = IntegerField()
-    rain_quantity = IntegerField()
-    snow_quantity = IntegerField()
+    rain_quantity = IntegerField(default=0)
+    snow_quantity = IntegerField(default=0)
     sun_set = BigIntegerField()
     sun_rise = BigIntegerField()
     calculation_time = BigIntegerField()
@@ -55,6 +56,7 @@ class Weather(BaseModel):
     longitude = FloatField()
     city_name = CharField(255)
     country_code = CharField(255)
+
 
 # Create Tables if no exist
 db.create_tables([Station], safe=True)
