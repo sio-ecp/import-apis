@@ -30,7 +30,8 @@ def insertweather(values):
     weather.min_temperature = values['main']['temp_min']
     weather.max_temperature = values['main']['temp_max']
     weather.wind_speed = values['wind']['speed']
-    weather.wind_direction = values['wind']['deg']
+    if 'deg' in values['wind']:
+        weather.wind_direction = values['wind']['deg']
     weather.cloudiness_percentage = values['clouds']['all']
     if 'rain' in values:
         weather.rain_quantity = values['rain']['3h']

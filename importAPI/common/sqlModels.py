@@ -45,7 +45,7 @@ class Weather(BaseModel):
     min_temperature = FloatField()
     max_temperature = FloatField()
     wind_speed = FloatField()
-    wind_direction = FloatField()
+    wind_direction = FloatField(default=-1.0) # Default is negative (wind direction not provided)
     cloudiness_percentage = IntegerField()
     rain_quantity = IntegerField(default=0)
     snow_quantity = IntegerField(default=0)
