@@ -2,6 +2,7 @@ import sqlModels
 
 
 def insertvelibstation(values):
+    """Creates and fill a velib Station line in the DB using provided values"""
     station = sqlModels.Station()
     station.station_number = values['number']
     station.station_name = values['contract_name']
@@ -22,8 +23,9 @@ def insertvelibstation(values):
 
 
 def insertweather(values):
+    """Creates and fill a weather information line in the DB using provided values"""
     weather = sqlModels.Weather()
-    weather.weather_group = values['weather'][0]['main']##TODO corresp?
+    weather.weather_group = values['weather'][0]['main']  # TODO: is it the right data here?
     weather.temperature = values['main']['temp']
     weather.pressure = values['main']['pressure']
     weather.humidity_percentage = values['main']['humidity']
@@ -49,6 +51,7 @@ def insertweather(values):
 
 # Travis test
 def doCommon(value):
+    """To test Travis and nosetest correct behaviour"""
     if value:
         return "OK"
     else:

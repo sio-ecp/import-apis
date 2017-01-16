@@ -10,6 +10,8 @@ DEFAULT_CITY='paris,fr'
 
 
 def importWeatherState(city=DEFAULT_CITY):
+    """Imports the current weather information, for the provided city"""
+
     # Build and send the request
     r = requests.get(API_URL, params={'APPID': API_KEY, 'q': city})
 

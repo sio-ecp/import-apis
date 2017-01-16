@@ -12,12 +12,15 @@ DBhost=sqlCredentials.HOST
 db = MySQLDatabase(DBname, host=DBhost, port=DBport, user=DBuser, passwd=DBpassword)
 db.connect()
 
+
 class BaseModel(Model):
+    """Represents the database in which data will be inserted, for peewee use"""
     class Meta:
         database = db
 
 
 class Station(BaseModel):
+    """Represents the Station SQL table"""
     id_station = PrimaryKeyField()
     station_number = IntegerField()
     station_name = CharField(255)
@@ -37,6 +40,7 @@ class Station(BaseModel):
 
 
 class Weather(BaseModel):
+    """Represents the Weather SQL table"""
     id_weather = PrimaryKeyField()
     weather_group = CharField(255)
     pressure = IntegerField()
@@ -59,5 +63,6 @@ class Weather(BaseModel):
 
 
 # Create Tables if no exist
+# -> Tells peewee to create the tables if they do not exist in the DB
 db.create_tables([Station], safe=True)
 db.create_tables([Weather], safe=True)
