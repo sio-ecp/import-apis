@@ -49,6 +49,24 @@ def insertweather(values):
     weather.save()
 
 
+def insertstationelevation(values, station_number):
+    """Creates and fill a stationelevation information line in the DB using provided values"""
+    elevation = sqlModels.StationElevation()
+    elevation.station_number = station_number
+    elevation.latitude = values['results'][0]['location']['lat']
+    elevation.longitude = values['results'][0]['location']['lng']
+    elevation.elevation = values['results'][0]['elevation']
+    if 'resolution' in values['results'][0]:
+        elevation.resolution = values['results'][0]['resolution']
+    elevation.save()
+
+
+def doeselevationexist(station_number):
+    """Check if this station's elevation number is already in the DB"""
+    count = sqlModels.StationElevation.select().where(sqlModels.StationElevation.station_number == station_number).count()
+    return count == 1
+
+
 # Travis test
 def doCommon(value):
     """To test Travis and nosetest correct behaviour"""

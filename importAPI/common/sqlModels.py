@@ -21,7 +21,7 @@ class BaseModel(Model):
 
 class Station(BaseModel):
     """Represents the Station SQL table"""
-    id_station = PrimaryKeyField()
+    id_station = IntegerField()
     station_number = IntegerField()
     station_name = CharField(255)
     contract_name = CharField(255)
@@ -61,8 +61,20 @@ class Weather(BaseModel):
     city_name = CharField(255)
     country_code = CharField(255)
 
+class StationElevation(BaseModel):
+    """Represents the Elevation SQL table"""
+    id = PrimaryKeyField()
+    station_number = IntegerField()
+    latitude = FloatField()
+    longitude = FloatField()
+    elevation = FloatField()
+    resolution = FloatField(default=-1.0)  # Default is negative (resolution provided)
+
+
 
 # Create Tables if no exist
 # -> Tells peewee to create the tables if they do not exist in the DB
 db.create_tables([Station], safe=True)
 db.create_tables([Weather], safe=True)
+db.create_tables([StationElevation], safe=True)
+

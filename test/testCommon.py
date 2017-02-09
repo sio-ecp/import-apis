@@ -21,11 +21,15 @@ def testweather():
 
 
 def testvelib():
-    countBefore = sqlModels.Station.select().count()
+    countBeforeV = sqlModels.Station.select().count()
+    countBeforeE = sqlModels.StationElevation.select().count()
+
     importVelib.importStationsStates('Paris')
-    countAfter = sqlModels.Station.select().count()
-    assert(countBefore < countAfter)
 
+    countAfterV = sqlModels.Station.select().count()
+    countAfterE = sqlModels.StationElevation.select().count()
 
+    assert(countBeforeV < countAfterV)
+    assert(countBeforeE < countAfterE) #TODO improve this test (counter will not necessarly be incremented)
 
 

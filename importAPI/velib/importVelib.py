@@ -1,6 +1,7 @@
 import requests
 import json
 import velibCredentials
+from importAPI.elevation import importElevation
 from importAPI.common import common
 
 #Constants
@@ -18,6 +19,22 @@ def importStationsStates(contract=DEFAULT_CONTRACT):
     # Parse received JSON
     parsed_json = json.loads(r.text)
 
+    # Init elevation API indicator to know whereas to call or not
+    elevationAPIOK = True
+    maxPerImport = 5 # In order not to reach the API limit
+
     for station in parsed_json:
         common.insertvelibstation(station)
+
+        stationNumber = station['number']
+        if elevationAPIOK and maxPerImport > 0:
+            if not common.doeselevationexist(stationNumber):
+                maxPerImport -= 1
+                lat = station['position']['lat']
+                lng = station['position']['lng']
+                elevation = importElevation.importElevation(lat, lng)
+                if not elevation:
+                    elevationAPIOK = False
+                else:
+                    common.insertstationelevation(elevation, stationNumber)
 
