@@ -21,7 +21,7 @@ class BaseModel(Model):
 
 class Station(BaseModel):
     """Represents the Station SQL table"""
-    id_station = IntegerField()
+    id_station = PrimaryKeyField()
     station_number = IntegerField()
     station_name = CharField(255)
     contract_name = CharField(255)
