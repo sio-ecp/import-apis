@@ -5,8 +5,8 @@ def insertvelibstation(values):
     """Creates and fill a velib Station line in the DB using provided values"""
     station = sqlModels.Station()
     station.station_number = values['number']
-    station.station_name = values['contract_name']
-    station.contract_name = values['name']
+    station.station_name = values['name']
+    station.contract_name = values['contract_name']
     station.address = values['address']
     station.banking = values['banking']
     station.bonus = values['bonus']
