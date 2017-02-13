@@ -49,21 +49,22 @@ def insertweather(values):
     weather.save()
 
 
-def insertstationelevation(values, station_number):
+def insertstationelevation(values, station_number, contract_name):
     """Creates and fill a stationelevation information line in the DB using provided values"""
     elevation = sqlModels.StationElevation()
     elevation.station_number = station_number
     elevation.latitude = values['results'][0]['location']['lat']
     elevation.longitude = values['results'][0]['location']['lng']
     elevation.elevation = values['results'][0]['elevation']
+    elevation.contract_name = contract_name
     if 'resolution' in values['results'][0]:
         elevation.resolution = values['results'][0]['resolution']
     elevation.save()
 
 
-def doeselevationexist(station_number):
+def doeselevationexist(station_number, contract_name):
     """Check if this station's elevation number is already in the DB"""
-    count = sqlModels.StationElevation.select().where(sqlModels.StationElevation.station_number == station_number).count()
+    count = sqlModels.StationElevation.select().where(sqlModels.StationElevation.station_number == station_number and sqlModels.StationElevation.contract_name == contract_name).count()
     return count == 1
 
 

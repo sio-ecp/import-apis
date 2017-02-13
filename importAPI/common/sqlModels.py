@@ -65,6 +65,7 @@ class StationElevation(BaseModel):
     """Represents the Elevation SQL table"""
     id = PrimaryKeyField()
     station_number = IntegerField()
+    contract_name = CharField()
     latitude = FloatField()
     longitude = FloatField()
     elevation = FloatField()

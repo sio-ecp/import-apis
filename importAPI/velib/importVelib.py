@@ -27,8 +27,9 @@ def importStationsStates(contract=DEFAULT_CONTRACT):
         common.insertvelibstation(station)
 
         stationNumber = station['number']
+        contractName = station['contract_name']
         if elevationAPIOK and maxPerImport > 0:
-            if not common.doeselevationexist(stationNumber):
+            if not common.doeselevationexist(stationNumber, contractName):
                 maxPerImport -= 1
                 lat = station['position']['lat']
                 lng = station['position']['lng']
@@ -36,5 +37,5 @@ def importStationsStates(contract=DEFAULT_CONTRACT):
                 if not elevation:
                     elevationAPIOK = False
                 else:
-                    common.insertstationelevation(elevation, stationNumber)
+                    common.insertstationelevation(elevation, stationNumber, contractName)
 
