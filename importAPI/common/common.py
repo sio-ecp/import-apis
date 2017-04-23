@@ -64,7 +64,7 @@ def insertstationelevation(values, station_number, contract_name):
 
 def doeselevationexist(station_number, contract_name):
     """Check if this station's elevation number is already in the DB"""
-    count = sqlModels.StationElevation.select().where(sqlModels.StationElevation.station_number == station_number and sqlModels.StationElevation.contract_name == contract_name).count()
+    count = sqlModels.StationElevation.select().where(sqlModels.StationElevation.station_number == station_number, sqlModels.StationElevation.contract_name == contract_name).count()
     return count >= 1
 
 
